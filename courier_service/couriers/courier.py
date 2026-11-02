@@ -1,0 +1,6 @@
+from typing import Protocol
+
+
+class Courier(Protocol):
+    def quote(self, delivery) -> float: ...
+    def book_shipment(self, delivery) -> None: ...
