@@ -1,0 +1,35 @@
+[build-system] # Defines the tools and backend used to build and install this project.
+requires = ["setuptools>=77.0.3"] # Install setuptools 77.0.3 or newer in the isolated build environment.
+build-backend = "setuptools.build_meta" # Use setuptools' standard Python build backend.
+
+[project] # Defines package metadata and runtime requirements.
+name = "courier-service-example" # Installed distribution name; Python imports use courier_service instead.
+version = "0.1.0" # Release version recorded in the installed package metadata.
+description = "A courier dispatch example using dependency injection and SQLite" # Short project summary.
+readme = "README.md" # Use this file for the project's detailed package description.
+requires-python = ">=3.10" # Require Python 3.10 or newer when installing the project.
+dependencies = [] # No third-party runtime dependencies; sqlite3 is part of Python's standard library.
+
+[project.optional-dependencies] # Defines optional dependency groups, also called extras.
+dev = [ # Include these development tools when installing with the [dev] extra.
+    "pytest>=8", # Install pytest 8 or newer to discover and run the tests.
+    "pyright>=1.1", # Install Pyright 1.1 or newer for static type checking.
+] # End of the development dependency list; requirements-dev.lock pins the tested versions.
+
+[project.scripts] # Defines command-line executables created when the project is installed.
+courier-dispatch = "courier_service.cli:main" # Make courier-dispatch call main() in courier_service.cli.
+
+[tool.setuptools.packages.find] # Configure which Python packages setuptools includes in installations.
+where = ["src"] # Search for packages under src, relative to this project directory.
+include = ["courier_service", "courier_service.*"] # Include the main package and all its subpackages.
+namespaces = false # Discover regular packages with __init__.py rather than implicit namespace packages.
+
+[tool.pytest.ini_options] # Configure pytest when it runs from this project.
+testpaths = ["tests"] # Search this directory for tests when no explicit test path is given.
+addopts = "--import-mode=importlib" # Import tests without adding their directories to sys.path.
+
+[tool.pyright] # Configure Pyright's static analysis of the project.
+include = ["."] # Analyse Python files under this project directory.
+exclude = [".venv", "build", "dist", "*.egg-info"] # Exclude environments and generated packaging files from discovery.
+pythonVersion = "3.10" # Check code against Python 3.10's language features and standard-library types.
+typeCheckingMode = "standard" # Use Pyright's standard set of type-checking rules.

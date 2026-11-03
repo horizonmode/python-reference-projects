@@ -1,12 +1,10 @@
 from .courier import Courier
-from .dhl_courier import DHLCourier
-from .post_office_courier import PostOfficeCourier
 from .selectors import CourierSelector, StandardSelector
+from .rate_based_courier import RateBasedCourier
 
 __all__ = [
     "Courier",
+    "RateBasedCourier",
     "CourierSelector",
-    "DHLCourier",
-    "PostOfficeCourier",
     "StandardSelector",
 ]

@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from random import Random
+from uuid import uuid4
 
 from .delivery_priority import DeliveryPriority
 
@@ -9,4 +10,4 @@ class Delivery:
     destination: str
     weight: float
     priority: DeliveryPriority
-    id: str = field(default_factory=lambda: str(Random().randint(100000, 999999)))
+    id: str = field(default_factory=lambda: str(uuid4()))
