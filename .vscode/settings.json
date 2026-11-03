@@ -1,6 +1,7 @@
 {
     "python.analysis.typeCheckingMode": "standard",
     "python.analysis.languageServerMode": "full",
+    "python.analysis.extraPaths": ["${workspaceFolder}/api/src"],
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
     "python-envs.defaultEnvManager": "ms-python.python:system"
