@@ -7,7 +7,9 @@ authors = [
     { name = "Seb Smith", email = "78294619+horizonmode@users.noreply.github.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "requests>=2.34.2",
+]
 
 [project.scripts]
 api = "api:main"

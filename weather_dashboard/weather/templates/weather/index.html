@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weather dashboard</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+      .forecast-history { margin-top: 2rem; }
+      .table-scroll { overflow-x: auto; }
+      table { width: 100%; border-collapse: collapse; }
+      caption { text-align: left; margin-bottom: 0.75rem; color: #475569; }
+      th, td { border: 1px solid #cbd5e1; padding: 0.75rem; text-align: left; }
+      thead { background: #e2e8f0; }
+      tbody tr:nth-child(even) { background: #f8fafc; }
+    </style>
+  </head>
+  <body>
+    <h1>Weather dashboard</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Get and save weather</button>
+    </form>
+
+    {% if coordinates %}
+      <p>Latitude: {{ coordinates.latitude }}</p>
+      <p>Longitude: {{ coordinates.longitude }}</p>
+    {% endif %}
+
+    {% if error %}
+      <p>{{ error }}</p>
+    {% endif %}
+
+    {% if forecast %}
+      <h2>{{ location_name }}</h2>
+      <p>{{ forecast.description }}</p>
+      <p>Temperature: {{ forecast.temperature }} °C</p>
+      <p>Humidity: {{ forecast.humidity }}%</p>
+      <p>Wind speed: {{ forecast.wind_speed }} km/h</p>
+      <small>
+        Location data ©
+        <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>
+      </small>
+    {% endif %}
+    <section class="forecast-history" aria-labelledby="history-heading">
+      <h2 id="history-heading">Previous forecasts</h2>
+      {% if forecasts %}
+        <div class="table-scroll">
+          <table>
+            <caption>Latest 20 saved lookups, newest first. Times shown in UTC.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Saved at (UTC)</th>
+                <th scope="col">Location</th>
+                <th scope="col">Conditions</th>
+                <th scope="col">Temperature (°C)</th>
+                <th scope="col">Humidity (%)</th>
+                <th scope="col">Wind (km/h)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for saved in forecasts %}
+                <tr>
+                  <td>{{ saved.fetched_at|date:"d M Y H:i" }}</td>
+                  <td>{{ saved.location_name }}</td>
+                  <td>{{ saved.description }}</td>
+                  <td>{{ saved.temperature|floatformat:1 }}</td>
+                  <td>{{ saved.humidity|floatformat:0 }}</td>
+                  <td>{{ saved.wind_speed|floatformat:1 }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p>No forecasts saved yet. Submit the form to save your first forecast.</p>
+      {% endif %}
+    </section>
+  </body>
+</html>

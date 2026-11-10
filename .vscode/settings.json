@@ -4,5 +4,8 @@
     "python.analysis.extraPaths": ["${workspaceFolder}/api/src"],
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
-    "python-envs.defaultEnvManager": "ms-python.python:system"
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "[django-html]": {
+        "editor.defaultFormatter": "junstyle.vscode-django-support"
+    }
 }
