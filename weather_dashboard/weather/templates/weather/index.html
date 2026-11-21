@@ -1,18 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Weather dashboard</title>
+    <script type="module" src="{% static 'weather/components/weather-card.js' %}"></script>
     <style>
-      body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
-      .forecast-history { margin-top: 2rem; }
-      .table-scroll { overflow-x: auto; }
-      table { width: 100%; border-collapse: collapse; }
-      caption { text-align: left; margin-bottom: 0.75rem; color: #475569; }
-      th, td { border: 1px solid #cbd5e1; padding: 0.75rem; text-align: left; }
-      thead { background: #e2e8f0; }
-      tbody tr:nth-child(even) { background: #f8fafc; }
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 1100px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .forecast-history {
+        margin-top: 2rem;
+      }
+      .table-scroll {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      caption {
+        text-align: left;
+        margin-bottom: 0.75rem;
+        color: #475569;
+      }
+      th,
+      td {
+        border: 1px solid #cbd5e1;
+        padding: 0.75rem;
+        text-align: left;
+      }
+      thead {
+        background: #e2e8f0;
+      }
+      tbody tr:nth-child(even) {
+        background: #f8fafc;
+      }
     </style>
   </head>
   <body>
@@ -34,16 +61,19 @@
     {% endif %}
 
     {% if forecast %}
-      <h2>{{ location_name }}</h2>
-      <p>{{ forecast.description }}</p>
-      <p>Temperature: {{ forecast.temperature }} °C</p>
-      <p>Humidity: {{ forecast.humidity }}%</p>
-      <p>Wind speed: {{ forecast.wind_speed }} km/h</p>
-      <small>
-        Location data ©
-        <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>
-      </small>
+      <weather-card>
+        <h2>{{ location_name }}</h2>
+        <p>{{ forecast.description }}</p>
+        <p>Temperature: {{ forecast.temperature }} °C</p>
+        <p>Humidity: {{ forecast.humidity }}%</p>
+        <p>Wind speed: {{ forecast.wind_speed }} km/h</p>
+        <small>
+          Location data ©
+          <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>
+        </small>
+      </weather-card>
     {% endif %}
+
     <section class="forecast-history" aria-labelledby="history-heading">
       <h2 id="history-heading">Previous forecasts</h2>
       {% if forecasts %}
@@ -63,7 +93,7 @@
             <tbody>
               {% for saved in forecasts %}
                 <tr>
-                  <td>{{ saved.fetched_at|date:"d M Y H:i" }}</td>
+                  <td>{{ saved.fetched_at|date:'d M Y H:i' }}</td>
                   <td>{{ saved.location_name }}</td>
                   <td>{{ saved.description }}</td>
                   <td>{{ saved.temperature|floatformat:1 }}</td>
