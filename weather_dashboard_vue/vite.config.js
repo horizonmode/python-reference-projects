@@ -6,6 +6,6 @@ export default defineConfig({
   build: {
     outDir: 'weather/static/weather',
     emptyOutDir: false,
-    lib: {entry: 'frontend/main.js', formats: ['es'], fileName: () => 'app.js'},
+    lib: {entry: 'weather/static/weather/app/main.js', formats: ['es'], fileName: () => 'app.js'},
   },
 });

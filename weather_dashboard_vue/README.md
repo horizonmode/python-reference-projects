@@ -23,7 +23,7 @@ uv run python manage.py runserver 8001
 Open **http://127.0.0.1:8001/**. The separate port lets the original dashboard
 continue running on port 8000. Stop with Ctrl+C.
 
-Vue components are single-file components (`.vue`) under `frontend/`, with
+Vue components are single-file components (`.vue`) under `weather/static/weather/app/`, with
 `<script>` and `<template>` sections. The compiled bundle includes Vue, so
 running Django needs neither Node nor CDN access. To edit frontend code,
 install Node.js 22.12+ and run:
@@ -51,7 +51,7 @@ timezone and do not change when a record is edited.
 2. The same DRF `ForecastSerializer` used by the API serializes the records.
 3. The `json_script` template filter embeds safely escaped JSON in the HTML,
    including pagination metadata, the CSRF token, and API URLs.
-4. `frontend/App.vue` parses `#initial-data` and initializes Vue's reactive state.
+4. `weather/static/weather/app/App.vue` parses `#initial-data` and initializes Vue's reactive state.
 5. Vue renders immediately from that state, with **no startup API request**.
 6. Later mutations use `fetch()` with JSON and an `X-CSRFToken` header. Vue
    applies the returned record and refreshes page one to keep history and totals
@@ -130,13 +130,13 @@ response format consistent for parsing, validation, and HTTP errors.
 | `weather/urls.py` | Page route and API router inclusion |
 | `weather/models.py` | Forecast database model |
 | `weather/templates/weather/index.html` | Page shell and embedded initial JSON |
-| `frontend/App.vue` | Vue state, API requests, forms, and history |
-| `frontend/ForecastCard.vue` | Reusable Vue SFC card with an object prop |
+| `weather/static/weather/app/App.vue` | Vue state, API requests, forms, and history |
+| `weather/static/weather/app/ForecastCard.vue` | Reusable Vue SFC card with an object prop |
 | `weather/static/weather/styles.css` | Responsive styling |
 
 Unlike a Django model, a JavaScript object can be passed directly between Vue
 components: `<ForecastCard :forecast="latest" />` passes the object as a prop.
-`frontend/main.js` mounts `App.vue`; `ForecastCard.vue` uses `<script setup>`
+`weather/static/weather/app/main.js` mounts `App.vue`; `ForecastCard.vue` uses `<script setup>`
 with `defineProps` and `defineEmits`. Edit the `.vue` sources and rebuild
 `weather/static/weather/app.js`.
 JSON is only needed when crossing the Python/browser boundary.

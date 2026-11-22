@@ -3882,7 +3882,7 @@ function Tc() {
 	ss();
 }
 process.env.NODE_ENV !== "production" && Tc();
-// frontend/ForecastCard.vue
+// weather/static/weather/app/ForecastCard.vue
 var Ec = { class: "forecast-card" }, Dc = { class: "temperature" }, Oc = { class: "muted" }, kc = { class: "actions" }, Ac = ["disabled"], jc = ["disabled"], Mc = {
 	__name: "ForecastCard",
 	props: {
@@ -4255,5 +4255,5 @@ function ml(e, t, n, r, i, a) {
 		])
 	]);
 }
-// frontend/main.js
+// weather/static/weather/app/main.js
 bc(/* @__PURE__ */ Nc(Ic, [["render", ml]])).mount("#app");

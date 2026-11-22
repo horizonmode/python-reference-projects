@@ -4,7 +4,7 @@ import test from 'node:test';
 import vm from 'node:vm';
 import {parse, compileScript} from '@vue/compiler-sfc';
 
-const sfc = await readFile(new URL('../frontend/App.vue', import.meta.url), 'utf8');
+const sfc = await readFile(new URL('../weather/static/weather/app/App.vue', import.meta.url), 'utf8');
 const {descriptor} = parse(sfc);
 const source = compileScript(descriptor, {id: 'app-test'}).content;
 const saved = {id: 1, location_name: 'Frome', latitude: 51, longitude: -2,
