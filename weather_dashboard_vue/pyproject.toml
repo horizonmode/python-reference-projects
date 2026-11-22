@@ -1,0 +1,26 @@
+[project]
+name = "weather-dashboard-vue"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "api",
+    "django>=5.2,<5.3",
+    "djangorestframework>=3.16,<4",
+]
+
+[tool.uv.sources]
+api = { path = "../api", editable = true }
+
+[tool.pyright]
+include = ["weather", "config", "manage.py"]
+venvPath = "."
+venv = ".venv"
+extraPaths = ["../api/src"]
+typeCheckingMode = "standard"
+
+[dependency-groups]
+dev = [
+    "django-stubs>=6.1.2",
+    "djangorestframework-stubs>=3.18.2",
+    "types-requests>=2.33.0.20261030",
+]

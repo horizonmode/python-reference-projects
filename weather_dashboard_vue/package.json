@@ -1,0 +1,17 @@
+{
+  "name": "weather-dashboard-vue",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "test": "npm run build && node --experimental-vm-modules --test frontend-tests/app.test.mjs"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.11",
+    "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "vue": "^3.5.46"
+  }
+}
